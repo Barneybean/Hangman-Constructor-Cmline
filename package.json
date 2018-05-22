@@ -1,0 +1,27 @@
+{
+  "name": "hangman-constructor-cmline",
+  "version": "1.0.0",
+  "description": "A Hangman game in command line using constructor functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Barneybean/Hangman-Constructor-Cmline.git"
+  },
+  "keywords": [
+    "Hangman",
+    "Constructor"
+  ],
+  "author": "Chunjin William",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Barneybean/Hangman-Constructor-Cmline/issues"
+  },
+  "homepage": "https://github.com/Barneybean/Hangman-Constructor-Cmline#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "inquirer": "^5.2.0"
+  }
+}
