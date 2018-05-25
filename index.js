@@ -1,0 +1,78 @@
+//require constructor in word.js to work
+var word = require("./word.js");
+var inquirer = require("inquirer");
+//to set game numbers equal to number of words in the array
+var round = 0;
+// limit guesses to be 15
+var guessCount = 15;
+var guessRight = 0;
+var guessWrong = 0;
+
+//add word for questions 
+var wordList = ["mountain", "chameleon", "salmon", "grayling"];
+//to create a arry that hold on the word obj to be gueseed
+var wordObjList = [];
+
+for(let i = 0; i < wordList.length; i++) {
+    //create new word obj
+    wordObjList.push(new word(wordList[i]));
+    //call for word obj and diassemble char in word
+    wordObjList[i].letterInWord();
+}
+// console.log(wordObjList);
+
+var askQUestion = function () {
+    var currentRound = round+1;
+    
+    if (guessCount >0) {
+        // console.log(wordObjList[round]),
+        // to print underscore of letter
+        wordObjList[round].printWord();
+        //get user inputs and check letter
+        inquirer.prompt ([
+        {
+            type: "input",
+            name: "userGuess",
+            message: "Round " + currentRound+ "; " +guessCount + " guess left; Guess a letter: " + "\n",
+            // validate: allow only one letter
+        },
+    ]).then(function(guess){
+
+        // console.log(guessCount + " guess left");
+        //guess chance -1
+        guessCount--;
+        
+        //if there is word not guessed then continue game
+        if (round < wordList.length) {
+            wordObjList[round].getLetter(String(guess.userGuess));
+        
+        }
+        //end of all rounds
+        else {
+            console.log("Game Over +\n + you guessed: " + guessRight + " correctly and " +guessWrong + " wrong. +\n + Restart Game? ")
+        };
+        // guess the whole word before chances run out, guess right ++
+       
+        if (guessCount >= 0 && wordObjList[round].runningWord.join("") === wordObjList[round].wordArry.join("")) {
+            console.log("***good job, next word\n");
+            guessRight++;
+            round++;
+            guessCount = 15;
+        }
+        // fail to guess the whole word before chances run out, guess wrong ++
+        else if(guessCount === 0 && wordObjList[round].runningWord.join("") !== wordObjList[round].wordArry.join("")) {
+            console.log("***you lose, next word\n");
+            guessWrong++;
+            round++;
+            guessCount = 15
+        }
+        else{console.log(6);}
+        
+        //recursion####### to allow next guess
+        askQUestion();
+    })
+    }
+    
+    
+};
+askQUestion();

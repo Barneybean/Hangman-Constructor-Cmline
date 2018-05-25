@@ -23,6 +23,7 @@ var Letter = function (letter) {
     this.checkLetter = function (userInput) {
         if(userInput === this.underlyingLetter) {
             this.letterGuessed = true;
+            
         }
     }   
 }
